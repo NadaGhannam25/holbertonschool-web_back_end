@@ -3,13 +3,16 @@ const fs = require('fs').promises;
 
 const database = process.argv[2];
 
+/**
+ * Helper function to count students asynchronously and return a string
+ */
 function getStudentsInfo(path) {
   return fs.readFile(path, 'utf8')
     .then((content) => {
       const lines = content
         .split('\n')
         .filter((line) => line.trim() !== '');
-      const rows = lines.slice(1); 
+      const rows = lines.slice(1); // skip header
 
       let output = `Number of students: ${rows.length}\n`;
 
